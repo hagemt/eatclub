@@ -118,9 +118,11 @@ login = HTTP::Client.put("https://www.eatclub.com/public/api/log-in/",
   body: get_creds,
   headers: headers
 )
+puts login.body
 
 (1..5).each do |i|
   url = "https://www.eatclub.com/menus/?categorized_menu=true&day=#{i}&menu_type=individual"
   resp = HTTP::Client.get(url, headers: login.cookies.add_request_headers(headers))
+  puts resp.body
   dsp(resp.body)
 end
